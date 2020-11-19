@@ -1,13 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Hello World with SAM
-
 Globals:
   Function:
     MemorySize: 128
     Runtime: nodejs12.x
     Timeout: 5
-
 Resources:
   eventLogger:
     Type: AWS::Serverless::Function
@@ -23,12 +21,12 @@ Resources:
         FileUpload:
           Type: S3
           Properties:
-            Bucket: !Ref MyBucket
+            Bucket:
+              Ref: MyBucket
             Events: s3:ObjectCreated:*
-
+      CodeUri: s3://rick-sam-helloword/6e134b72db26f51274eaa0ad6c598e26
   MyBucket:
     Type: AWS::S3::Bucket
-
   addNumbers:
     Type: AWS::Serverless::Function
     Properties:
@@ -39,3 +37,4 @@ Resources:
           Properties:
             Path: /add
             Method: post
+      CodeUri: s3://rick-sam-helloword/6e134b72db26f51274eaa0ad6c598e26
